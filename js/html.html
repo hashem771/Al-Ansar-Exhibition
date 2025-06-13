@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض جميع المستخدمين</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>قائمة المستخدمين</h1>
+    <div id="userList"></div>
+
+    <!-- تحميل مكتبات Firebase بشكل يدعم الوحدات -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-storage.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script type="module" src="firebaseConfig.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

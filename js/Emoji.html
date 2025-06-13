@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفع الإيموجي</title>
+</head>
+<body>
+    <h1>رفع الإيموجي إلى Firebase</h1>
+    <form id="emojiForm">
+        <label for="emojiImage">اختيار الإيموجي:</label>
+        <input type="file" id="emojiImage" accept="image/*" required>
+        <br><br>
+        
+        <label for="emojiName">اسم الإيموجي:</label>
+        <input type="text" id="emojiName" placeholder="اسم الإيموجي" required>
+        <br><br>
+        
+        <button type="submit">رفع الإيموجي</button>
+    </form>
+
+    <script type="module">
+        import { db, storage } from './firebaseConfig.js';
+        import { ref as dbRef, set, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+        import { ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-storage.js";
+
+        async function uploadEmoji(imageFile, emojiName) {
+            try {
+                // إنشاء مرجع للإيموجي في قاعدة البيانات
+                const emojiRef = push(dbRef(db, 'emojis'));
+
+                // إنشاء مرجع تخزين للصورة ورفعها
+                const emojiStorageRef = storageRef(storage, `emojis/${emojiRef.key}`);
+                await uploadBytes(emojiStorageRef, imageFile);
+
+                // الحصول على رابط التنزيل للصورة المرفوعة
+                const downloadURL = await getDownloadURL(emojiStorageRef);
+
+                // تخزين بيانات الإيموجي مع رابط الصورة في قاعدة البيانات
+                await set(emojiRef, {
+                    name: emojiName,
+                    imageUrl: downloadURL
+                });
+
+                alert("تم رفع الإيموجي بنجاح!");
+            } catch (error) {
+                console.error("خطأ في رفع الإيموجي:", error);
+                alert("حدث خطأ أثناء رفع الإيموجي.");
+            }
+        }
+
+        document.getElementById('emojiForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const imageFile = document.getElementById('emojiImage').files[0];
+            const emojiName = document.getElementById('emojiName').value;
+
+            if (imageFile) {
+                uploadEmoji(imageFile, emojiName);
+            } else {
+                alert("الرجاء اختيار صورة للإيموجي.");
+            }
+        });
+    </script>
+</body>
+</html>
