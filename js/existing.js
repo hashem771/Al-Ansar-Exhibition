@@ -11,12 +11,12 @@ const userIdElement = document.getElementById('userId');
 
 // فتح القائمة الجانبية عند النقر على زر القائمة
 menuBtn.addEventListener('click', () => {
-    sideMenu.style.display = 'block';
+    sideMenu.style.display = 'block'; // TODO: Review if this inline style can be moved to a CSS class.
 });
 
 // إغلاق القائمة الجانبية عند النقر على زر الإغلاق
 closeBtn.addEventListener('click', () => {
-    sideMenu.style.display = 'none';
+    sideMenu.style.display = 'none'; // TODO: Review if this inline style can be moved to a CSS class.
 });
 
 // نسخ معلومات المستخدم إلى القائمة الجانبية مع التأكد من وجود العناصر

@@ -1,30 +1,22 @@
 // استيراد Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getDatabase, ref, get, set, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"; // No longer needed directly
+import { getDatabase, ref, get, set, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"; // Keep if other specific DB ops are used, else db from config is enough for ref()
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"; // Keep for onAuthStateChanged, else auth from config is enough
+import { db, auth } from './firebaseConfig.js'; // Added import
 
-// تكوين Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyCNlNpZZn-tkIRpOZXeOJqgnagNk9hRyqI",
-    authDomain: "bing-8e48f.firebaseapp.com",
-    databaseURL: "https://bing-8e48f-default-rtdb.firebaseio.com",
-    projectId: "bing-8e48f",
-    storageBucket: "bing-8e48f.appspot.com",
-    messagingSenderId: "463368456917",
-    appId: "1:463368456917:android:41612df40b1a4aa6e1f05c"
-};
+// Firebase config is now imported
+// Removed inline firebaseConfig
+// Removed initializeApp, using imported db/auth
+// Using imported db
+// Using imported auth
 
-// تهيئة Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
+// Global variable for imageId, to be set in initPostPage
+let imageId;
 
-// الحصول على imageId من عنوان URL
-const urlParams = new URLSearchParams(window.location.search);
-const imageId = urlParams.get('imageId');
-
+// This block of code that runs on script load to fetch post data will be moved into initPostPage
+/*
 // استرجاع البيانات من Firebase
-const dbRef = ref(db, 'Images/' + imageId);
+const dbRef = ref(db, 'Images/' + imageId); // imageId here would be undefined initially
 get(dbRef).then((snapshot) => {
     const data = snapshot.val();
     if (data) {
@@ -43,6 +35,7 @@ get(dbRef).then((snapshot) => {
 }).catch((error) => {
     console.error('حدث خطأ أثناء جلب البيانات:', error);
 });
+*/
 
 // تحميل معلومات المستخدم
 function loadUserProfile(userId) {
@@ -56,13 +49,13 @@ function loadUserProfile(userId) {
 
             // إنشاء صورة الملف الشخصي
             const profileImageElement = document.createElement('img');
-            profileImageElement.src = userData.profileImage || 'default-avatar.png';
+            profileImageElement.src = userData.profileImage || '../images/default-avatar.png';
             profileImageElement.alt = "صورة الملف الشخصي";
-            profileImageElement.style.width = "50px"; // ضبط العرض
-            profileImageElement.style.height = "50px"; // ضبط الطول
-            profileImageElement.style.borderRadius = "50%"; // جعل الصورة دائرية
-            profileImageElement.style.marginLeft = "10px"; // هامش إلى اليسار
-            profileImageElement.style.cursor = "pointer"; // تغيير مؤشر الفأرة لإظهار إمكانية النقر
+            profileImageElement.style.width = "50px"; // TODO: Review if this inline style can be moved to a CSS class. // ضبط العرض
+            profileImageElement.style.height = "50px"; // TODO: Review if this inline style can be moved to a CSS class. // ضبط الطول
+            profileImageElement.style.borderRadius = "50%"; // TODO: Review if this inline style can be moved to a CSS class. // جعل الصورة دائرية
+            profileImageElement.style.marginLeft = "10px"; // TODO: Review if this inline style can be moved to a CSS class. // هامش إلى اليسار
+            profileImageElement.style.cursor = "pointer"; // TODO: Review if this inline style can be moved to a CSS class. // تغيير مؤشر الفأرة لإظهار إمكانية النقر
 
             // عند النقر على صورة الملف الشخصي، توجه إلى صفحة الملف الشخصي
             profileImageElement.onclick = () => {
@@ -72,7 +65,7 @@ function loadUserProfile(userId) {
             // إنشاء اسم المستخدم كنص قابل للنقر
             const userNameElement = document.createElement("span");
             userNameElement.textContent = userData.userName || 'مستخدم مجهول';
-            userNameElement.style.cursor = "pointer"; // تغيير مؤشر الفأرة لإظهار إمكانية النقر
+            userNameElement.style.cursor = "pointer"; // TODO: Review if this inline style can be moved to a CSS class. // تغيير مؤشر الفأرة لإظهار إمكانية النقر
             userNameElement.onclick = () => {
                 window.location.href = `profile.html?userId=${userId}`;
             };
@@ -182,13 +175,13 @@ function displayComment(commentData) {
     
     // إنشاء صورة الملف الشخصي
     const profileImageElement = document.createElement('img');
-    profileImageElement.src = commentData.profileImage || 'default-avatar.png';
+    profileImageElement.src = commentData.profileImage || '../images/default-avatar.png';
     profileImageElement.alt = "صورة الملف الشخصي";
-    profileImageElement.style.width = "30px"; // ضبط العرض
-    profileImageElement.style.height = "30px"; // ضبط الطول
-    profileImageElement.style.borderRadius = "50%"; // جعل الصورة دائرية
-    profileImageElement.style.marginRight = "10px"; // هامش إلى اليمين
-    profileImageElement.style.cursor = "pointer"; // تغيير المؤشر إلى يد عند المرور فوق الصورة
+    profileImageElement.style.width = "30px"; // TODO: Review if this inline style can be moved to a CSS class. // ضبط العرض
+    profileImageElement.style.height = "30px"; // TODO: Review if this inline style can be moved to a CSS class. // ضبط الطول
+    profileImageElement.style.borderRadius = "50%"; // TODO: Review if this inline style can be moved to a CSS class. // جعل الصورة دائرية
+    profileImageElement.style.marginRight = "10px"; // TODO: Review if this inline style can be moved to a CSS class. // هامش إلى اليمين
+    profileImageElement.style.cursor = "pointer"; // TODO: Review if this inline style can be moved to a CSS class. // تغيير المؤشر إلى يد عند المرور فوق الصورة
     
     // إضافة حدث النقر على صورة الملف الشخصي
     profileImageElement.onclick = () => {
@@ -198,7 +191,7 @@ function displayComment(commentData) {
     // إنشاء عنصر لاسم المستخدم
     const userNameElement = document.createElement("span");
     userNameElement.textContent = commentData.userName || 'مستخدم مجهول';
-    userNameElement.style.cursor = "pointer"; // تغيير المؤشر إلى يد عند المرور فوق الاسم
+    userNameElement.style.cursor = "pointer"; // TODO: Review if this inline style can be moved to a CSS class. // تغيير المؤشر إلى يد عند المرور فوق الاسم
 
     // إضافة حدث النقر على اسم المستخدم
     userNameElement.onclick = () => {
@@ -252,7 +245,7 @@ function setupCommentButton() {
             const newCommentData = {
                 text: newCommentText,
                 userId: user.uid, // إضافة userId
-                profileImage: userData.val().profileImage || 'default-avatar.png', // صورة الملف الشخصي
+                profileImage: userData.val().profileImage || '../images/default-avatar.png', // صورة الملف الشخصي
                 userName: userData.val().userName || 'مستخدم مجهول' // اسم المستخدم
             };
 
@@ -281,5 +274,44 @@ function sanitizeInput(input) {
     return temp.innerHTML; // إرجاع المدخلات المعقمة
 }
 
+async function initPostPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    imageId = urlParams.get('imageId'); // Assign to global imageId
+
+    if (imageId) {
+        // The initial data loading logic, now safely using the global imageId
+        const dbRef = ref(db, 'Images/' + imageId);
+        try {
+            const snapshot = await get(dbRef);
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('imageTitle').textContent = data.title;
+                document.getElementById('image').src = data.url;
+                document.getElementById('likes').textContent = data.likes || 0; // Default to 0 if undefined
+                document.getElementById('views').textContent = data.views || 0; // Default to 0 if undefined
+
+                loadUserProfile(data.userId);
+                // Ensure loadComments and setupCommentButton are called after imageId is set.
+                // displayPost (called by loadPost) already calls these.
+                await loadPost(imageId); // loadPost also calls displayPost, which calls loadComments & setupCommentButton
+            } else {
+                console.log('الصورة غير موجودة');
+                document.getElementById('postContainer').innerHTML = "<p>الصورة غير موجودة.</p>";
+            }
+        } catch (error) {
+            console.error('حدث خطأ أثناء جلب البيانات:', error);
+            document.getElementById('postContainer').innerHTML = "<p>حدث خطأ أثناء جلب البيانات.</p>";
+        }
+    } else {
+        console.error("Image ID not found in URL for post page.");
+        // Ensure postContainer exists before trying to set its innerHTML
+        const postContainer = document.getElementById('postContainer');
+        if (postContainer) {
+            postContainer.innerHTML = "<p>Error: Image ID missing.</p>";
+        }
+    }
+}
+
 // بدء التطبيق
-loadPost(imageId);
+initPostPage();
+// Wrapped initial load in initPostPage

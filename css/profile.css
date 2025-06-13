@@ -1,0 +1,108 @@
+/* الأساسيات لصفحة الملف الشخصي */
+body {
+    font-family: var(--font-family-main);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light-gray); /* Approximation for #f9f9f9 */
+}
+
+header {
+    background-color: var(--primary-green);
+    color: var(--text-on-dark-bg);
+    padding: var(--padding-medium);
+    text-align: center;
+}
+
+#profileSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: var(--padding-large);
+}
+
+.profile-info-box { /* Was #profileInfo */
+    text-align: center;
+    margin-bottom: var(--padding-large);
+}
+
+.profile-avatar-main { /* Was #profileImage */
+    width: 150px;
+    height: 150px;
+    border-radius: var(--border-radius-circle);
+    object-fit: cover;
+    border: 2px solid var(--primary-green);
+}
+
+.profile-name-display { /* Was #profileName */
+    margin: var(--padding-small) 0;
+    font-size: 1.5em;
+}
+
+.profile-stats-followers { /* Was #followersCount */
+    margin: 5px 0; /* 5px could be --spacing-tiny */
+    font-size: 1.2em;
+    color: var(--text-secondary);
+}
+
+.button-follow-profile-page { /* Was #followBtn */
+    padding: var(--padding-small) var(--padding-large);
+    background-color: var(--primary-green);
+    color: var(--text-on-dark-bg);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+}
+
+.button-follow-profile-page:hover { /* Was #followBtn:hover */
+    background-color: var(--primary-green-dark);
+}
+
+.profile-user-posts-section { /* Was #userPosts */
+    width: 100%;
+    max-width: 1200px;
+    margin-top: var(--padding-large);
+}
+
+.profile-gallery-grid { /* Was #postsContainer */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: var(--padding-small);
+    padding: var(--padding-small);
+}
+
+.post {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-medium);
+}
+
+@media (max-width: 600px) {
+    .profile-avatar-main { /* Was #profileImage */
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-name-display { /* Was #profileName */
+        font-size: 1.2em;
+    }
+
+    .button-follow-profile-page { /* Was #followBtn */
+        padding: var(--border-radius-medium) 16px; /* 8px, 16px (16px not a direct var) */
+    }
+
+    .profile-gallery-grid { /* Was #postsContainer */
+        grid-template-columns: 1fr;
+    }
+
+    .post {
+        margin-bottom: var(--padding-medium);
+    }
+}

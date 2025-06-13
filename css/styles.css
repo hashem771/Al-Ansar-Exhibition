@@ -1,0 +1,356 @@
+:root {
+    /* Added by Jules */
+    --primary-blue: #007bff;
+    --primary-blue-dark: #0056b3;
+    --primary-green: #4CAF50;
+    --primary-green-dark: #45a049;
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-on-dark-bg: #fff;
+    --text-on-light-bg: #333;
+    --bg-light-gray: #f4f4f4;
+    --bg-white: #fff;
+    --border-color-light: #ddd;
+    --border-color-medium: #ccc;
+    --accent-red: #ff4757;
+    --google-red: #db4437;
+    --font-family-main: 'Arial', sans-serif;
+    --padding-small: 10px;
+    --padding-medium: 15px;
+    --padding-large: 20px;
+    --border-radius-small: 5px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 10px;
+    --border-radius-extra-large: 20px;
+    --border-radius-circle: 50%;
+}
+
+/*styles.css*/
+
+/* الأساسيات العامة */
+body {
+    font-family: var(--font-family-main);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light-gray);
+    text-align: center;
+    direction: rtl;
+}
+
+header {
+    background-color: var(--primary-blue);
+    color: var(--text-on-dark-bg);
+    padding: var(--padding-medium);
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.search-input-main { /* Was #searchBar */
+    width: 90%;
+    padding: var(--padding-small);
+    margin-top: var(--padding-small);
+    border: none;
+    border-radius: var(--border-radius-extra-large);
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-user-area { /* Was #profileSection */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--padding-small);
+}
+
+/* Styles for #profileImage and #logoutBtn in styles.css are assumed to target the sideMenu items */
+/* Thus, they should use the classes defined from existing.css context */
+.profile-image-menu { /* Was #profileImage */
+    border-radius: var(--border-radius-circle);
+    margin-right: var(--padding-small);
+    /* Note: existing.css has more specific styles for this like width, height, border */
+}
+
+.logout-button-menu { /* Was #logoutBtn */
+    background-color: var(--accent-red);
+    color: var(--text-on-dark-bg);
+    padding: var(--padding-small) var(--padding-large); /* Assuming 10px 20px was intended for small and large */
+    border: none;
+    border-radius: var(--border-radius-extra-large);
+    cursor: pointer;
+    /* Note: existing.css has more specific styles for this like width, margin, font-size */
+}
+
+.logout-button-menu:hover { /* Was #logoutBtn:hover */
+    background-color: #e84118; /* This color is not in variables, consider --accent-red-dark */
+}
+
+.follow-button, .add-button {
+    background-color: var(--primary-green);
+    color: var(--text-on-dark-bg);
+    padding: var(--padding-medium);
+    border: none;
+    border-radius: var(--border-radius-circle);
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    bottom: var(--padding-large); /* 20px */
+    right: var(--padding-large); /* 20px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.follow-button {
+    right: 80px; /* This might need a variable if 80px is common, e.g., --spacing-xlarge */
+}
+
+.add-button:hover {
+    background-color: var(--primary-green-dark); /* #45a049, script used #218838, this is an approximation */
+}
+
+/* نافذة رفع الصور */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Replacing #uploadModal with .modal-upload-container for the general modal structure if needed */
+/* However, .modal is already a class. If #uploadModal had specific ID styles, they'd go to .modal-upload-container */
+/* Assuming .modal class itself covers the #uploadModal styles. If #uploadModal has unique ID styles, they'd be: */
+/* .modal-upload-container { ... } */
+
+.modal-content {
+    background-color: var(--bg-white);
+    margin: 15% auto;
+    padding: var(--padding-large);
+    border-radius: var(--border-radius-large);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-input-image-upload, .modal-input-image-title { /* Was #imageUpload, #imageTitle */
+    width: 100%;
+    padding: var(--padding-small);
+    margin-bottom: var(--padding-small);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-small);
+}
+
+.modal-progress-bar-upload { /* Was #uploadProgress */
+    width: 100%;
+    margin-bottom: var(--padding-small);
+}
+
+.modal-button-confirm-upload, .modal-button-close { /* Was #uploadBtn, #closeModalBtn */
+    width: 100%;
+    padding: var(--padding-small);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+}
+
+.modal-button-confirm-upload { /* Was #uploadBtn */
+    background-color: var(--primary-blue);
+    color: var(--text-on-dark-bg);
+}
+
+.modal-button-confirm-upload:hover { /* Was #uploadBtn:hover */
+    background-color: var(--primary-blue-dark);
+}
+
+.modal-button-close { /* Was #closeModalBtn */
+    background-color: #6c757d; /* This gray is not in the variables list, keep as is or define --secondary-gray */
+    color: var(--text-on-dark-bg);
+    margin-top: var(--padding-small);
+}
+
+.modal-button-close:hover { /* Was #closeModalBtn:hover */
+    background-color: #5a6268;
+}
+
+/* حاوية الصور */
+/* تنسيق الصور في المعرض */
+/* #imageGallery is likely a JS hook. If it had styles, they'd be .gallery-main-container */
+.gallery-image {
+    max-width: 100%; /* يجعل عرض الصورة بحد أقصى عرض الصفحة أو العنصر الذي يحتويها */
+    height: auto; /* يحافظ على نسبة الأبعاد الأصلية للصورة */
+    display: block; /* لتجنب التصاق الصور بالعناصر الأخرى */
+    margin: var(--padding-small) auto; /* لضبط تباعد مناسب حول الصور */
+}
+
+.image-card {
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: var(--padding-small);
+    padding: var(--padding-medium);
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.image-card img {
+    max-width: 100%;
+    border-radius: var(--border-radius-large);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--padding-small);
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-circle);
+    margin-right: var(--padding-small);
+}
+
+.username, .user-id {
+    font-size: 14px;
+    margin: 0;
+}
+
+.username {
+    font-weight: bold;
+}
+
+./* حاوية التفاعلات */
+.post-footer {
+    margin-top: 10px;
+}
+
+.interaction {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.interaction div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-stats {
+    display: flex; /* استخدام flexbox لترتيب العناصر بشكل أفقي */
+    align-items: center; /* محاذاة العناصر بشكل عمودي في المنتصف */
+    margin-top: var(--padding-small); /* إضافة مساحة فوق السطر */
+}
+
+.likes, .views {
+    font-size: 14px; /* حجم الخط للإعجابات والمشاهدات */
+    color: var(--text-secondary); /* لون النص */
+    margin-right: var(--padding-medium); /* إضافة مسافة بين النصوص */
+}
+
+.like-btn {
+    padding: 5px var(--padding-small); /* حجم الزر */
+    background-color: var(--primary-blue); /* لون خلفية الزر */
+    color: var(--text-on-dark-bg); /* لون النص داخل الزر */
+    border: none; /* إزالة الحدود */
+    border-radius: var(--border-radius-small); /* جعل الزر ذو حواف دائرية */
+    cursor: pointer; /* تغيير شكل المؤشر عند المرور على الزر */
+    margin-left: var(--padding-medium); /* إضافة مسافة بين زر الإعجاب وعدد المشاهدات */
+}
+
+.like-btn:hover {
+    background-color: var(--primary-blue-dark); /* تغيير لون الخلفية عند تمرير المؤشر */
+}
+.image-card { /* This is a duplicate .image-card rule, likely a merge artifact in original CSS */
+    border: 1px solid var(--border-color-light);
+    padding: var(--padding-small);
+    margin-bottom: var(--padding-medium);
+    border-radius: var(--border-radius-medium);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--padding-small);
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-circle);
+    margin-right: var(--padding-small);
+}
+
+.user-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.user-id {
+    font-size: 0.9em;
+    color: gray;
+    margin: 0;
+}
+
+.like-icon {
+    width: 30px;  /* حجم أكبر قليلاً */
+    height: 30px; /* اجعل الارتفاع مساويًا للعرض للحفاظ على النسبة */
+    object-fit: contain; /* الحفاظ على الشكل الأصلي للصورة */
+    border: 2px solid var(--primary-green); /* حواف خضراء حول الأيقونة */
+    border-radius: var(--border-radius-circle); /* جعل الحواف مدورة */
+    padding: 5px; /* This is not var(--padding-small), so kept as 5px. Or define --padding-tiny or --spacing-tiny */
+    background-color: var(--bg-white); /* خلفية بيضاء لتعزيز وضوح الحواف */
+    display: inline-block; /* للتأكد من أن الحواف تظهر بشكل صحيح */
+}
+
+@media (max-width: 600px) {
+    .like-icon {
+        width: 25px; /* حجم أصغر للأجهزة الصغيرة */
+        height: 25px;
+    }
+}
+
+@media (min-width: 601px) {
+    .like-icon {
+        width: 30px; /* حجم أكبر للأجهزة الأكبر */
+        height: 30px;
+    }
+}
+
+/* Generic Icon Styling */
+.icon {
+  width: 16px; /* Default width */
+  height: 16px; /* Default height */
+  vertical-align: middle;
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.like-icon {
+ /* Specific style for like icons if needed, e.g., size */
+ width: 24px;
+ height: 24px;
+ cursor: pointer;
+}
+
+/* Add other specific icon class styles here if needed */
+
+.icon.no-margin {
+ margin-right: 0;
+}
+.button-text-hidden { display: none; }
+@media (hover: hover) {
+ .add-button:hover .button-text-hidden {display: inline; margin-left: 5px;}
+}

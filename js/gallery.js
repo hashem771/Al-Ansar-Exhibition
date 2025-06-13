@@ -3,6 +3,43 @@
 import { db } from './firebaseConfig.js';
 import { ref, get } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 import { incrementLikes, checkIfLiked, incrementViews } from './likes.js';
+
+// Helper function to create an image card DOM element
+// TODO: Implement this function to build the card using DOM APIs or safer template literals
+function createImageCardElement(imageData, userProfile, imageId) {
+    const imgElement = document.createElement("div");
+    imgElement.classList.add("image-card");
+    // Minimized HTML string for structure - ideally build with DOM methods
+    imgElement.innerHTML = `
+        <div class="user-info">
+            <img src="${userProfile ? userProfile.profileImage : '../images/default-avatar.png'}" alt="Profile Image" class="profile-image gallery-profile-avatar" style="cursor: pointer;">
+            <div class="user-details">
+                <p class="user-name gallery-user-name" style="cursor: pointer;">${userProfile ? userProfile.userName : 'مستخدم مجهول'}</p>
+                <p class="user-id gallery-user-id">
+                    ${userProfile ? userProfile.userId : 'unknown'}
+                    ${userProfile && userProfile.Premium && userProfile.verificationIcon ? `<img src="${userProfile.verificationIcon}" alt="موثق" class="verification-icon" style="width: 15px; height: 15px; margin-right: 5px;">` : ''}
+                </p>
+            </div>
+        </div>
+        <h3>${imageData.title}</h3>
+        <img src="${imageData.url}" alt="${imageData.title}" class="image-view" data-image-id="${imageId}">
+        <div class="image-stats">
+            <p class="likes">الإعجابات: ${imageData.likes || 0}</p>
+            <p class="views">المشاهدات: ${imageData.views || 0}</p>
+        </div>
+        <img src="images/icons/Like.png" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
+    `;
+    // Add event listeners (example)
+    // These should ideally be attached by the caller or through a more robust event delegation
+    imgElement.querySelector(".gallery-profile-avatar").addEventListener("click", () => {
+        window.location.href = `profile.html?userId=${imageData.userId}`;
+    });
+    imgElement.querySelector(".gallery-user-name").addEventListener("click", () => {
+        window.location.href = `profile.html?userId=${imageData.userId}`;
+    });
+    // Like icon and image view listeners would also be set up here or returned for setup
+    return imgElement;
+}
 import { displayUserProfile } from './profiles.js';
 
 const userCache = {};
@@ -80,7 +117,7 @@ export async function loadImages() {
                             <p class="likes">الإعجابات: ${imageData.likes || 0}</p>
                             <p class="views">المشاهدات: ${imageData.views || 0}</p>
                         </div>
-                        <img src="icons/Like.png" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
+                        <img src="images/icons/Like.png" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
                     `;
 
                     imgElement.querySelector(".profile-image").addEventListener("click", () => {
@@ -94,17 +131,17 @@ export async function loadImages() {
 
                     await checkIfLiked(imageId).then((isLiked) => {
                         if (isLiked) {
-                            likeIcon.src = "icons/Like1.png";
+                            likeIcon.src = "images/icons/Like1.png";
                         }
                     });
 
                     likeIcon.addEventListener('click', async () => {
-                        if (likeIcon.src.includes("Like.png")) {
+                        if (likeIcon.src.includes("images/icons/Like.png")) { // Ensure this check is robust
                             await incrementLikes(imageId, imgElement);
-                            likeIcon.src = "icons/Like1.png";
+                            likeIcon.src = "images/icons/Like1.png";
                         } else {
                             await incrementLikes(imageId, imgElement);
-                            likeIcon.src = "icons/Like.png";
+                            likeIcon.src = "images/icons/Like.png";
                         }
                     });
 
@@ -116,6 +153,11 @@ export async function loadImages() {
                     imageGallery.appendChild(imgElement);
 
                     observer.observe(imgElement.querySelector('.image-view'));
+                    // TODO: Refactor the loop above to use:
+                    // const cardElement = createImageCardElement(imageData, userProfile, imageId);
+                    // Attach likeIcon and imageView listeners to cardElement children.
+                    // imageGallery.appendChild(cardElement);
+                    // observer.observe(cardElement.querySelector(".image-view"));
                 }
             }
         } else {

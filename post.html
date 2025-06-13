@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل الصورة</title>
-    <link rel="stylesheet" href="post.css">
+    <link rel="stylesheet" href="css/post.css">
     <script type="module" src="js/post.js" defer></script>
 </head>
 <body>
@@ -13,31 +13,31 @@
     </header>
     
     <main>
-        <div id="postContainer">
+        <article id="postContainer" class="post-content-card">
     <div id="userInfoContainer" style="display: flex; align-items: center; margin-bottom: 20px;">
-        <img id="profileImage" alt="صورة الملف الشخصي" style="width: 50px; height: 50px; border-radius: 50%; margin-left: 10px;">
-        <span id="userName" style="margin-left: 10px;">مستخدم مجهول</span>
+        <img id="profileImage" class="post-user-avatar" alt="صورة الملف الشخصي" style="width: 50px; height: 50px; border-radius: 50%; margin-left: 10px;">
+        <span id="userName" class="post-user-name" style="margin-left: 10px;">مستخدم مجهول</span>
     </div>
-    <h2 id="imageTitle">عنوان الصورة</h2>
-    <img id="image" src="" alt="صورة" style="width: 100%; max-width: 600px; height: auto;">
+    <h2 id="imageTitle" class="post-title-main">عنوان الصورة</h2>
+    <img id="image" class="post-image-featured" src="" alt="صورة" style="width: 100%; max-width: 600px; height: auto;">
     
     <!-- حاوية الإعجابات والمشاهدات -->
-    <div id="likesViewsContainer">
-        <p>الإعجابات: <span id="likes">0</span></p>
-        <p>المشاهدات: <span id="views">0</span></p>
+    <div id="likesViewsContainer" class="post-stats-container">
+        <p><img src="images/icons/Like.png" alt="Like" class="icon like-icon-post" data-post-id="<!-- DYNAMIC_POST_ID -->"> الإعجابات: <span id="likes">0</span></p>
+        <p><img src="images/icons/eye.svg" alt="Views" class="icon"> المشاهدات: <span id="views">0</span></p>
     </div>
     
-    <button id="downloadBtn">تحميل الصورة</button>
-</div>
+    <button id="downloadBtn" class="button-download-post"><img src="images/icons/download.svg" alt="Download" class="icon"> تحميل الصورة</button>
+</article>
 
-        <div id="commentsSection">
+        <section id="commentsSection">
             <h3>التعليقات</h3>
-            <div id="commentsContainer">
+            <div id="commentsContainer" class="comments-area">
                 <p>جاري تحميل التعليقات...</p>
             </div>
-            <input type="text" id="commentInput" placeholder="أضف تعليقك هنا...">
-            <button id="addCommentBtn">إضافة تعليق</button>
-        </div>
+            <input type="text" id="commentInput" class="comment-input-main" placeholder="أضف تعليقك هنا...">
+            <button id="addCommentBtn" class="button-add-comment-main">إضافة تعليق</button>
+        </section>
     </main>
 
     <footer>

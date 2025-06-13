@@ -7,6 +7,25 @@ import { get, set, remove, onValue, ref } from "https://www.gstatic.com/firebase
 // ذاكرة مؤقتة لحفظ بيانات المستخدمين
 const userCache = {};
 
+// Helper function to create a post preview element for the profile page
+// TODO: Implement this function properly
+function createPostPreviewElement(post, postId) {
+    const postElement = document.createElement('div');
+    postElement.className = 'post'; // Assuming 'post' is the class for styling post previews
+    // Minimized HTML string for structure - ideally build with DOM methods
+    postElement.innerHTML = `
+        <h3>${post.title || "عنوان غير متوفر"}</h3>
+        <img src="${post.url || 'default-image.png'}" alt="${post.title || 'صورة غير متوفرة'}" class="post-image profile-post-image">
+        <p>الإعجابات: ${post.likes || 0}</p>
+        <p>المشاهدات: ${post.views || 0}</p>
+    `;
+    // Add click listener to the image to navigate to the post details page
+    postElement.querySelector('.profile-post-image').onclick = () => {
+        window.location.href = `post.html?imageId=${postId}`;
+    };
+    return postElement;
+}
+
 // تأكد من أن DOM جاهز قبل تشغيل أي كود
 document.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, (user) => {
@@ -122,6 +141,9 @@ function loadUserPosts(userId) {
                     };
 
                     postsContainer.appendChild(postElement);
+                    // TODO: Refactor loop to use:
+                    // const postPreview = createPostPreviewElement(post, postId);
+                    // postsContainer.appendChild(postPreview);
                 }
             });
 
@@ -149,7 +171,7 @@ function checkFollowStatus(currentUserId, targetUserId) {
 
     // تحقق إذا كان المستخدم الحالي هو نفس المستخدم المعروض
     if (currentUserId === targetUserId) {
-        followButton.style.display = 'none'; // إخفاء زر المتابعة
+        followButton.style.display = 'none'; // TODO: Review if this inline style can be moved to a CSS class. // إخفاء زر المتابعة
     } else {
         onValue(followRef, (snapshot) => {
             followButton.textContent = snapshot.exists() ? 'إلغاء المتابعة' : 'متابعة';

@@ -1,0 +1,79 @@
+/* existing.css */
+/* زر النقاط الثلاث */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: var(--padding-large); /* 20px */
+    cursor: pointer;
+    position: absolute;
+    right: var(--padding-large); /* 20px */
+    top: var(--padding-large); /* 20px */
+}
+
+.side-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-white);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    padding-top: var(--padding-large); /* 20px */
+}
+
+.menu-content {
+    padding: var(--padding-large); /* 20px */
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: var(--padding-small); /* 10px */
+    left: var(--padding-small); /* 10px */
+}
+
+.profile-image-menu { /* Was #profileImage */
+    width: 80px;
+    height: 80px;
+    border-radius: var(--border-radius-circle);
+    margin-bottom: var(--padding-medium); /* 15px */
+    border: 2px solid var(--primary-blue);
+}
+
+.user-name-menu, .user-id-menu { /* Was #userName, #userId */
+    font-size: 18px;
+    color: var(--text-primary);
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.logout-button-menu, .follow-button-menu { /* Was #logoutBtn, #followBtn */
+    background-color: var(--primary-blue);
+    color: var(--text-on-dark-bg);
+    padding: 12px; /* This value (12px) is not in variables, can use --padding-medium (15px) or --padding-small (10px) or define new */
+    border: none;
+    border-radius: var(--border-radius-extra-large); /* 25px approximated to 20px */
+    width: 90%;
+    margin: 12px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button-menu:hover, .follow-button-menu:hover { /* Was #logoutBtn:hover, #followBtn:hover */
+    background-color: var(--primary-blue-dark);
+}
+
+/* تحسين التجربة على الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .side-menu {
+        width: 100%;
+    }
+}

@@ -1,0 +1,100 @@
+/* إعدادات أساسية */
+body {
+    font-family: var(--font-family-main);
+    background-color: var(--bg-light-gray); /* Approximation for #f0f4f8 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: var(--text-primary);
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary-blue-dark);
+    margin-bottom: var(--padding-large);
+}
+
+form {
+    background-color: var(--bg-white);
+    padding: var(--padding-large);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: var(--padding-large);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; /* Keep 5px or use --spacing-tiny */
+    color: var(--text-primary);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    width: 100%;
+    padding: var(--padding-small);
+    margin-bottom: var(--padding-medium);
+    border: 1px solid var(--border-color-medium);
+    border-radius: var(--border-radius-small);
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 5px; /* Keep 5px or use --spacing-tiny */
+}
+
+button {
+    width: 100%;
+    padding: 12px; /* Keep 12px or choose small/medium padding */
+    background-color: var(--primary-blue-dark);
+    border: none;
+    border-radius: var(--border-radius-small);
+    color: var(--text-on-dark-bg);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--primary-blue-dark); /* Approximation for #003d80 */
+}
+
+/* زر ثانوي */
+.button-link-show-register, .button-link-show-login { /* Was button#showRegister, button#showLogin */
+    background-color: transparent;
+    color: var(--primary-blue-dark);
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 5px; /* Keep 5px or use --spacing-tiny */
+}
+
+.button-link-show-register:hover, .button-link-show-login:hover { /* Was button#showRegister:hover, button#showLogin:hover */
+    color: var(--primary-blue-dark); /* Approximation for #003d80 */
+}
+
+/* تحسينات للعرض المتجاوب */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+/* تخصيص Google Button */
+.button-social-google-login, .button-social-google-register { /* Was button#googleLoginBtn, button#googleRegisterBtn */
+    background-color: var(--google-red);
+    margin-top: var(--padding-small);
+}
+
+.button-social-google-login:hover, .button-social-google-register:hover { /* Was button#googleLoginBtn:hover, button#googleRegisterBtn:hover */
+    background-color: var(--google-red); /* Approximation for #b3372b */
+}

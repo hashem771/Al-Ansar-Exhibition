@@ -71,7 +71,7 @@ function assignEmojiUploadEvents() {
                         const userRef = dbRef(db, `users/${selectedUserId}`);
                         update(userRef, { verificationEmoji: downloadURL }).then(() => {
                             alert("تم رفع إيموجي التوثيق بنجاح!");
-                            uploadEmojiModal.style.display = 'none';
+                            uploadEmojiModal.style.display = 'none'; // TODO: Review if this inline style can be moved to a CSS class.
                             usersContainer.innerHTML = '';
                             displayUsers();
                         }).catch((error) => {
@@ -87,7 +87,7 @@ function assignEmojiUploadEvents() {
 
     if (closeEmojiModalBtn) {
         closeEmojiModalBtn.onclick = () => {
-            uploadEmojiModal.style.display = 'none';
+            uploadEmojiModal.style.display = 'none'; // TODO: Review if this inline style can be moved to a CSS class.
         };
     }
 }
@@ -126,7 +126,7 @@ function togglePremium(userId) {
 // فتح نافذة رفع إيموجي
 function openUploadEmojiModal(userId) {
     selectedUserId = userId;
-    uploadEmojiModal.style.display = 'block';
+    uploadEmojiModal.style.display = 'block'; // TODO: Review if this inline style can be moved to a CSS class.
 }
 
 // عرض المستخدمين عند تحميل الصفحة

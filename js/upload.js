@@ -14,11 +14,11 @@ const addImageBtn = document.getElementById("addImageBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
 
 addImageBtn.addEventListener("click", () => {
-    uploadModal.style.display = "block";
+    uploadModal.style.display = "block"; // TODO: Review if this inline style can be moved to a CSS class.
 });
 
 closeModalBtn.addEventListener("click", () => {
-    uploadModal.style.display = "none";
+    uploadModal.style.display = "none"; // TODO: Review if this inline style can be moved to a CSS class.
 });
 
 // تحميل الصورة إلى Firebase مع شريط تقدم
@@ -53,7 +53,7 @@ uploadBtn.addEventListener("click", async () => {
             alert("تم رفع الصورة بنجاح!");
             // استدعاء دالة تحميل الصور بعد الرفع
             loadImages();
-            uploadModal.style.display = "none";
+            uploadModal.style.display = "none"; // TODO: Review if this inline style can be moved to a CSS class.
         });
     } else {
         alert("يرجى اختيار صورة وإدخال عنوان.");

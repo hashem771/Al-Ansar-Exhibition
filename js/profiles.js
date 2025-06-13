@@ -22,7 +22,7 @@ export function displayUserProfile(userId) {
             userNameElement.textContent = userData.userName || 'مستخدم مجهول';
             userIdElement.textContent = userData.userId || 'unknown';
 
-            profileImageElement.style.cursor = "pointer";
+            profileImageElement.style.cursor = "pointer"; // TODO: Review if this inline style can be moved to a CSS class.
             profileImageElement.onclick = () => {
                 window.location.href = `profile.html?userId=${userId}`;
             };
@@ -32,9 +32,9 @@ export function displayUserProfile(userId) {
                 const userIdVerificationIcon = document.createElement('img');
                 userIdVerificationIcon.src = userData.verificationIcon; // استخدام رابط الأيقونة من بيانات المستخدم
                 userIdVerificationIcon.alt = 'موثق';
-                userIdVerificationIcon.style.width = '20px';
-                userIdVerificationIcon.style.height = '20px';
-                userIdVerificationIcon.style.marginLeft = '5px';
+                userIdVerificationIcon.style.width = '20px'; // TODO: Review if this inline style can be moved to a CSS class.
+                userIdVerificationIcon.style.height = '20px'; // TODO: Review if this inline style can be moved to a CSS class.
+                userIdVerificationIcon.style.marginLeft = '5px'; // TODO: Review if this inline style can be moved to a CSS class.
                 userIdElement.appendChild(userIdVerificationIcon); // إضافة الأيقونة بجانب معرف المستخدم فقط
             }
         } else {

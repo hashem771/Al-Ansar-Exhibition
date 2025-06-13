@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الملف الشخصي</title>
-    <link rel="stylesheet" href="profile.css"> <!-- ربط ملف CSS الخاص بك -->
+    <link rel="stylesheet" href="css/profile.css"> <!-- ربط ملف CSS الخاص بك -->
 </head>
 <body>
     <header>
@@ -12,17 +12,17 @@
     </header>
 
     <section id="profileSection">
-        <div id="profileInfo">
-            <img id="profileImage" alt="الصورة الشخصية" src="default-avatar.png">
-            <h2 id="profileName">اسم المستخدم</h2>
-            <p id="followersCount">عدد المتابعين: 0</p> <!-- إضافة عنصر لعدد المتابعين -->
-            <button id="followBtn">متابعة</button>
+        <div id="profileInfo" class="profile-info-box">
+            <img id="profileImage" class="profile-avatar-main" alt="الصورة الشخصية" src="images/default-avatar.png">
+            <h2 id="profileName" class="profile-name-display">اسم المستخدم</h2>
+            <p id="followersCount" class="profile-stats-followers">عدد المتابعين: 0</p> <!-- إضافة عنصر لعدد المتابعين -->
+            <button id="followBtn" class="button-follow-profile-page">متابعة</button>
         </div>
 
-        <div id="userPosts">
+        <section id="userPosts" class="profile-user-posts-section">
             <h3>منشورات المستخدم</h3>
-            <div id="postsContainer"></div>
-        </div>
+            <div id="postsContainer" class="profile-gallery-grid"></div>
+        </section>
     </section>
 
     <!-- تحميل ملف JS كـ module -->
