@@ -27,7 +27,7 @@ function createImageCardElement(imageData, userProfile, imageId) {
             <p class="likes">الإعجابات: ${imageData.likes || 0}</p>
             <p class="views">المشاهدات: ${imageData.views || 0}</p>
         </div>
-        <img src="images/icons/Like.png" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
+        <img src="images/icons/like.svg" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
     `;
     // Add event listeners (example)
     // These should ideally be attached by the caller or through a more robust event delegation
@@ -117,7 +117,7 @@ export async function loadImages() {
                             <p class="likes">الإعجابات: ${imageData.likes || 0}</p>
                             <p class="views">المشاهدات: ${imageData.views || 0}</p>
                         </div>
-                        <img src="images/icons/Like.png" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
+                        <img src="images/icons/like.svg" alt="Like" class="like-icon" data-image-id="${imageId}" style="cursor: pointer;">
                     `;
 
                     imgElement.querySelector(".profile-image").addEventListener("click", () => {
@@ -131,17 +131,17 @@ export async function loadImages() {
 
                     await checkIfLiked(imageId).then((isLiked) => {
                         if (isLiked) {
-                            likeIcon.src = "images/icons/Like1.png";
+                            likeIcon.src = "images/icons/like-active.svg";
                         }
                     });
 
                     likeIcon.addEventListener('click', async () => {
-                        if (likeIcon.src.includes("images/icons/Like.png")) { // Ensure this check is robust
+                        if (likeIcon.src.includes("images/icons/like.svg")) { // Ensure this check is robust and matches the non-active state
                             await incrementLikes(imageId, imgElement);
-                            likeIcon.src = "images/icons/Like1.png";
+                            likeIcon.src = "images/icons/like-active.svg";
                         } else {
                             await incrementLikes(imageId, imgElement);
-                            likeIcon.src = "images/icons/Like.png";
+                            likeIcon.src = "images/icons/like.svg";
                         }
                     });
 
