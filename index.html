@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة اجتماعية لمشاركة الصور</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="existing.css">
+</head>
+<body>
+    <header>
+        <h1>منصة اجتماعية لمشاركة الصور</h1>
+        <input type="text" id="searchBar" placeholder="ابحث عن الصور">
+        <div id="profileSection">
+            <button class="menu-btn" id="menuBtn">☰</button> <!-- زر النقاط الثلاث -->
+        </div>
+    </header>
+    
+    <!-- القائمة الجانبية -->
+    <nav id="sideMenu" class="side-menu">
+        <div class="menu-content">
+            <button id="closeBtn" class="close-btn">×</button> <!-- زر X لإغلاق القائمة الجانبية -->
+            <img id="profileImage" alt="الصورة الشخصية" src="default-avatar.png" width="100">
+            <span id="userName">اسم المستخدم</span> <!-- عنصر لعرض اسم المستخدم في القائمة الجانبية -->
+            <span id="userId">معرف المستخدم</span> <!-- عنصر لعرض معرف المستخدم في القائمة الجانبية -->
+            <button id="logoutBtn">تسجيل الخروج</button> <!-- زر تسجيل الخروج -->
+            <button id="followBtn">متابعة الأشخاص</button> <!-- زر متابعة الأشخاص -->
+        </div>
+    </nav>
+
+    <button class="add-button" id="addImageBtn">+</button>
+
+    <!-- نافذة رفع الصور -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <h2>رفع صورة</h2>
+            <input type="file" id="imageUpload" accept="image/*">
+            <input type="text" id="imageTitle" placeholder="عنوان الصورة">
+            <progress id="uploadProgress" value="0" max="100"></progress>
+            <button id="uploadBtn">رفع</button>
+            <button id="closeModalBtn">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="imageGallery"></div>
+    <div id="postsContainer"></div> <!-- حاوية المنشورات -->
+
+    <script type="module" src="js/firebaseConfig.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/profiles.js"></script>
+    <script type="module" src="js/upload.js"></script>
+    <script type="module" src="js/gallery.js"></script>
+    <script type="module" src="js/likes.js"></script>
+    <script src="js/existing.js"></script> <!-- ملف existing.js لإدارة القائمة الجانبية -->
+</body>
+</html>
